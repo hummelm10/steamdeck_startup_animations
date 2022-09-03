@@ -71,7 +71,7 @@ check_backup_js_css() {
 }
 
 list_animations() {
-  find . -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm' -print0
+  find ./deck_startup/ -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm' -print0
 }
 
 random_animation() {
