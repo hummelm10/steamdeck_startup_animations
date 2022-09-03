@@ -9,6 +9,8 @@ The modifications allow for:
 
 A collection of steamdeck startup animations, plus a script to randomize your startup on each boot
 
+You can add/remove webms as long as theyre exactly 1840847 bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory. The service uses the find command to randomly select one from that folder. 
+
 # So far, I've made boot animations from the following consoles:
 
 * dreamcast
