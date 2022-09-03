@@ -12,6 +12,18 @@ if [[ -f "$HOME/.steam/steam/steamui/movies/deck_startup.webm.backup" ]]; then
   mv "$HOME/.steam/steam/steamui/movies/deck_startup.webm.backup" "$HOME/.steam/steam/steamui/movies/deck_startup.webm"
 fi
 
+if [[ -f "$HOME/.steam/steam/steamui/css/library.css.backup" ]]; then
+  echo ":: Restoring library.css.backup"
+  rm "$HOME/.steam/steam/steamui/css/library.css"
+  mv "$HOME/.steam/steam/steamui/css/library.css" "$HOME/.steam/steam/steamui/css/library.css"
+fi
+
+if [[ -f "$HOME/.steam/steam/steamui/library.js.backup" ]]; then
+  echo ":: Restoring library.js.backup"
+  rm "$HOME/.steam/steam/steamui/library.js"
+  mv "$HOME/.steam/steam/steamui/library.js.backup" "$HOME/.steam/steam/steamui/library.js"
+fi
+
 if [[ -e "$HOME/homebrew/startup_animations" ]]; then
   echo ":: Deleting the startup_animations directory"
   rm -rf "$HOME/homebrew/startup_animations"

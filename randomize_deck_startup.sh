@@ -36,6 +36,40 @@ check_backup() {
   fi
 }
 
+DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
+DECK_CSS_FILE_SIZE=38488
+DECK_CSS_STOCK_MD5="22d52af1fc507209fef4cf72a7a234d4"
+
+DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
+DECK_JS_FILE_SIZE=296411
+DECK_JS_STOCK_MD5="047a4968a9e81faba14727a498f45429"
+
+check_backup_js_css() {
+  if [[ ! -f "$DECK_CSS_FILE.backup" ]]; then
+    checksum="$(md5sum "$DECK_CSS_FILE" | cut -d ' ' -f 1)"
+    if [[ "$checksum" != "$DECK_CSS_STOCK_MD5" ]]; then
+      msg2 "library.css has already been modified, cannot make a backup"
+    else
+      msg "Creating backup of initial library.css ($checksum)"
+      cp "$DECK_CSS_FILE" "$DECK_CSS_FILE.backup"
+      msg "Copying new CSS file"
+      cp "/home/deck/homebrew/startup_animations/library.css" "$DECK_CSS_FILE"
+    fi
+  fi
+
+  if [[ ! -f "$DECK_JS_FILE.backup" ]]; then
+    checksum="$(md5sum "$DECK_JS_FILE" | cut -d ' ' -f 1)"
+    if [[ "$checksum" != "$DECK_JS_STOCK_MD5" ]]; then
+      msg2 "library.js has already been modified, cannot make a backup"
+    else
+      msg "Creating backup of initial library.js ($checksum)"
+      cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
+      msg "Copying new JS file"
+      cp "/home/deck/homebrew/startup_animations/library.js" "$DECK_JS_FILE"
+    fi
+  fi
+}
+
 list_animations() {
   find . -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm' -print0
 }
@@ -46,6 +80,7 @@ random_animation() {
 }
 
 check_backup
+check_backup_js_css
 animation="$(random_animation)"
 msg "Using $animation"
 ln -f "$animation" "$DECK_STARTUP_FILE"

@@ -8,7 +8,7 @@ mkdir -p "$HOME/.config/systemd/user"
 # Clone the startup animations repository
 if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
   echo ":: Installing to $HOME/homebrew/startup_animations"
-  git clone https://github.com/kageurufu/steamdeck_startup_animations "$HOME/homebrew/startup_animations"
+  git clone https://github.com/hummelm10/steamdeck_startup_animations "$HOME/homebrew/startup_animations"
   cd "$HOME/homebrew/startup_animations"
 else
   echo ":: Updating $HOME/homebrew/startup_animations"
