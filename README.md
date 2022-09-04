@@ -51,6 +51,9 @@ systemctl --user enable --now randomize_deck_startup.service
 bash $HOME/homebrew/startup_animations/uninstall.sh
 ```
 
+# Issue Reporting
+Please include the journalctl logs using the output from `journalctl SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing. 
+
 # Making an animation (somewhat advanced)
 
 I used youtube-dl to grab the best video and audio tracks from youtube, and then ffmpeg to merge them, resizing down to fit the Deck's 1280x800 screen. Then I use `truncate` to make the file the right size. 

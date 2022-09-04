@@ -52,8 +52,6 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.css ($checksum)"
       cp "$DECK_CSS_FILE" "$DECK_CSS_FILE.backup"
-      msg "Copying new CSS file"
-      cp "/home/deck/homebrew/startup_animations/library.css" "$DECK_CSS_FILE"
     fi
   fi
 
@@ -64,8 +62,6 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.js ($checksum)"
       cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
-      msg "Copying new JS file"
-      cp "/home/deck/homebrew/startup_animations/library.js" "$DECK_JS_FILE"
     fi
   fi
 }
@@ -81,6 +77,10 @@ random_animation() {
 
 check_backup
 check_backup_js_css
+msg "Using new CSS file"
+ln -f "$HOME/homebrew/startup_animations/library.css" "$DECK_CSS_FILE"
+msg "Copying new JS file"
+ln -f "$HOME/homebrew/startup_animations/library.js" "$DECK_JS_FILE"
 animation="$(random_animation)"
 msg "Using $animation"
 ln -f "$animation" "$DECK_STARTUP_FILE"
