@@ -1,3 +1,5 @@
+# PLEASE DON'T USE. STICK TO MAIN BRANCH.
+
 # steamdeck_startup_animations
 This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added library.css and library.js file modifications following this guide https://docs.google.com/document/d/1LP3sLpi6N3NMSbqquLlY8a0ZNpFT-WRyRLiU_tm6N-k/edit from reddit user /u/Crazy89_
 
@@ -12,7 +14,7 @@ A collection of steamdeck startup animations, plus a script to randomize your st
 You can add/remove webms as long as theyre exactly 1840847 bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory. The service uses the find command to randomly select one from that folder. 
 
 **NOTE: library.css and library.js in the repo are for SteamOS 3.3.1 (build 20220817.1) and I will update if needed. As of now I am only maintaining the STABLE branch**
-**The feature/dev version uses sed to automatically update the files**
+
 # So far, I've made boot animations from the following consoles:
 
 * dreamcast
