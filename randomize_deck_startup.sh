@@ -52,6 +52,7 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.css ($checksum)"
       cp "$DECK_CSS_FILE" "$DECK_CSS_FILE.backup"
+      cp "$DECK_CSS_FILE" "$HOME/homebrew/startup_animations/library.css.mod"
     fi
   fi
 
@@ -62,6 +63,7 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.js ($checksum)"
       cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
+      cp "$DECK_JS_FILE" "$HOME/homebrew/startup_animations/library.js.mod"
     fi
   fi
 }
@@ -75,12 +77,31 @@ random_animation() {
   echo "${animations[$RANDOM % ${#animations[@]}]}"
 }
 
+mod_css() {
+  msg "Modifying CSS file"
+  sed -i -E 's/^(.*img\{.*width\:)(300px)(.*height\:)(.*px)(.*$)/\10100%\3/' "$HOME/homebrew/startup_animations/library.css.mod"
+  sed -i -E 's/^(.*video\{.*width\:)(300px)(.*height\:)(.*px)(.*$)/\10100%\3/' "$HOME/homebrew/startup_animations/library.css.mod"
+  sed -i -E 's/^(.*animation-duration\:)(.*ms)(.*$)/\13000ms\3/' "$HOME/homebrew/startup_animations/library.css.mod"
+  sed -i -E 's/^(.*animation-delay\:)(.*ms)(.*$)/\111500ms\3/' "$HOME/homebrew/startup_animations/library.css.mod"
+  msg "Enabled full screen animations"
+  ln -f "$HOME/homebrew/startup_animations/library.css.mod" "$DECK_CSS_FILE"
+  msg "Linked modified CSS file"
+}
+
+mod_js() {
+  msg "Modifying JS file"
+  sed -i -E 's/(.*return Object\(f\.y\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Modified time limit"
+  sed -i -E -E 's/(.*)(HapticEvent\(0,2,6,2,0\))(.*$)/\1HapticEvent\(0,0,0,0,0\)\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Disabled boot haptics"
+  ln -f "$HOME/homebrew/startup_animations/library.js.mod" "$DECK_JS_FILE"
+  msg "Linked modified JS file"
+}
+
 check_backup
 check_backup_js_css
-msg "Using new CSS file"
-ln -f "$HOME/homebrew/startup_animations/library.css" "$DECK_CSS_FILE"
-msg "Copying new JS file"
-ln -f "$HOME/homebrew/startup_animations/library.js" "$DECK_JS_FILE"
+mod_css
+mod_js
 animation="$(random_animation)"
 msg "Using $animation"
 ln -f "$animation" "$DECK_STARTUP_FILE"
