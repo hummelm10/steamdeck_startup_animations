@@ -74,6 +74,8 @@ list_animations() {
 
 random_animation() {
   mapfile -d $'\0' animations < <(list_animations)
+  #add SEED based on pid with $$
+  RANDOM=$$
   echo "${animations[$RANDOM % ${#animations[@]}]}"
 }
 
