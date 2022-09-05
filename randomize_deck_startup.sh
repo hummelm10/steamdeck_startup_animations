@@ -37,7 +37,6 @@ check_backup() {
 }
 
 DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
-DECK_CSS_FILE_SIZE=38488
 DECK_CSS_STOCK_MD5="22d52af1fc507209fef4cf72a7a234d4"
 
 DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
@@ -52,6 +51,7 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.css ($checksum)"
       cp "$DECK_CSS_FILE" "$DECK_CSS_FILE.backup"
+      cp "$DECK_CSS_FILE" "$HOME/homebrew/startup_animations/library.css.modb"
     fi
   fi
 
@@ -59,9 +59,11 @@ check_backup_js_css() {
     checksum="$(md5sum "$DECK_JS_FILE" | cut -d ' ' -f 1)"
     if [[ "$checksum" != "$DECK_JS_STOCK_MD5" ]]; then
       msg2 "library.js has already been modified, cannot make a backup"
+      cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.modb"
     else
       msg "Creating backup of initial library.js ($checksum)"
       cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
+      cp "$DECK_JS_FILE" "$HOME/homebrew/startup_animations/library.js.mod"
     fi
   fi
 }
@@ -72,15 +74,52 @@ list_animations() {
 
 random_animation() {
   mapfile -d $'\0' animations < <(list_animations)
+  #add SEED based on pid with $$
+  RANDOM=$$
   echo "${animations[$RANDOM % ${#animations[@]}]}"
+}
+
+mod_css() {
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.css.modb" ]]; then
+    cp "$DECK_CSS_FILE.backup" "$HOME/homebrew/startup_animations/library.css.modb"
+  fi
+  DECK_CSS_FILE_SIZE=$(stat -c %s "$DECK_CSS_FILE.backup")
+  msg "CSS File Size: $DECK_CSS_FILE_SIZE"
+  cp "$HOME/homebrew/startup_animations/library.css.modb" "$HOME/homebrew/startup_animations/library.css.mod"
+  msg "Modifying CSS file"
+  perl -p -i -e 's/^(.+?)\s(.*img\{.*?width\:)(.*?px)(.*?height\:)(.*?px)(.*?$)/${1}${2}0100%${4}0100%${6}/g' "$HOME/homebrew/startup_animations/library.css.mod"
+  perl -p -i -e 's/^(.+?)\s(.*video\{.*?width\:)(.*?px)(.*?height\:)(.*?px)(.*?$)/${1}${2}0100%${4}0100%${6}/g' "$HOME/homebrew/startup_animations/library.css.mod"
+  perl -p -i -e 's/^(!?.*animation-duration\:)(.*?ms)(.*$)/${1}3000ms${3}/g' "$HOME/homebrew/startup_animations/library.css.mod"
+  perl -p -i -e 's/^(!?.*animation-delay\:)(.*?ms)(.*$)/${1}11500ms${3}/g' "$HOME/homebrew/startup_animations/library.css.mod"
+  #remove comment line to make room for truncate
+  sed -i '/\/\*.*\*\// d; /\/\*/,/\*\// d' "$HOME/homebrew/startup_animations/library.css.mod"
+  truncate -s $DECK_CSS_FILE_SIZE "$HOME/homebrew/startup_animations/library.css.mod"
+  msg "Enabled full screen animations"
+  ln -f "$HOME/homebrew/startup_animations/library.css.mod" "$DECK_CSS_FILE"
+  msg "Linked modified CSS file"
+}
+
+mod_js() {
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.modb" ]]; then
+    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.modb"
+  fi
+  DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
+  msg "JS File Size: $DECK_JS_FILE_SIZE"
+  cp "$HOME/homebrew/startup_animations/library.js.modb" "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Modifying JS file"
+  sed -i -E 's/(.*return Object\(f\.y\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Modified time limit"
+  sed -i -E -E 's/(.*)(HapticEvent\(0,2,6,2,0\))(.*$)/\1HapticEvent\(0,0,0,0,0\)\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  truncate -s $DECK_JS_FILE_SIZE "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Disabled boot haptics"
+  ln -f "$HOME/homebrew/startup_animations/library.js.mod" "$DECK_JS_FILE"
+  msg "Linked modified JS file"
 }
 
 check_backup
 check_backup_js_css
-msg "Using new CSS file"
-ln -f "$HOME/homebrew/startup_animations/library.css" "$DECK_CSS_FILE"
-msg "Copying new JS file"
-ln -f "$HOME/homebrew/startup_animations/library.js" "$DECK_JS_FILE"
+mod_css
+mod_js
 animation="$(random_animation)"
 msg "Using $animation"
 ln -f "$animation" "$DECK_STARTUP_FILE"
