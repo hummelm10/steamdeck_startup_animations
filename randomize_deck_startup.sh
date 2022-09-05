@@ -37,7 +37,6 @@ check_backup() {
 }
 
 DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
-DECK_CSS_FILE_SIZE=38488
 DECK_CSS_STOCK_MD5="22d52af1fc507209fef4cf72a7a234d4"
 
 DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
@@ -82,6 +81,8 @@ mod_css() {
   if [[ ! -f "$HOME/homebrew/startup_animations/library.css.modb" ]]; then
     cp "$DECK_CSS_FILE.backup" "$HOME/homebrew/startup_animations/library.css.modb"
   fi
+  DECK_CSS_FILE_SIZE=$(stat -c %s "$DECK_CSS_FILE.backup")
+  msg "CSS File Size: $DECK_CSS_FILE_SIZE.backup"
   cp "$HOME/homebrew/startup_animations/library.css.modb" "$HOME/homebrew/startup_animations/library.css.mod"
   msg "Modifying CSS file"
   perl -p -i -e 's/^(.+?)\s(.*img\{.*?width\:)(.*?px)(.*?height\:)(.*?px)(.*?$)/${1}${2}0100%${4}0100%${6}/g' "$HOME/homebrew/startup_animations/library.css.mod"
@@ -100,6 +101,8 @@ mod_js() {
   if [[ ! -f "$HOME/homebrew/startup_animations/library.js.modb" ]]; then
     cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.modb"
   fi
+  DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
+  msg "JS File Size: $DECK_JS_FILE_SIZE.backup"
   cp "$HOME/homebrew/startup_animations/library.js.modb" "$HOME/homebrew/startup_animations/library.js.mod"
   msg "Modifying JS file"
   sed -i -E 's/(.*return Object\(f\.y\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
