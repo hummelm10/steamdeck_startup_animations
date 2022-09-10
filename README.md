@@ -1,5 +1,5 @@
 # steamdeck_startup_animations
-This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added library.css and library.js file modifications following this guide https://docs.google.com/document/d/1LP3sLpi6N3NMSbqquLlY8a0ZNpFT-WRyRLiU_tm6N-k/edit from reddit user /u/Crazy89_
+This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added library.css and library.js file modifications following this guide https://docs.google.com/document/d/1LP3sLpi6N3NMSbqquLlY8a0ZNpFT-WRyRLiU_tm6N-k/edit from reddit user /u/Crazy89_ which you can find saved [here](docs/manual_modificaiton_steps.md)
 
 The modifications allow for:
 * Full screen animations
@@ -62,6 +62,9 @@ bash $HOME/homebrew/startup_animations/uninstall.sh
 
 # Issue Reporting
 Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing. 
+
+# Recovery Steps
+If you do run into an issue where you cannot boot please follow the steps [here](docs/recovery_steps.md)
 
 # Making an animation (somewhat advanced)
 
