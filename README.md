@@ -53,6 +53,11 @@ curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animatio
 ```
 (There's a chance the feature/dev branch will soft brick your device since I'm still working on it. Don't do unless you know what you're doing. However, there is a chance at recovery if you boot from a USB and manually restore the css and js files and remove the startup script.)
 
+# Updating
+To update run the following. This will preserve whatever is in `/home/deck/homebrew/startup_animations/deck_startup` and will not overwrite any files. 
+```sh
+bash $HOME/homebrew/startup_animations/update.sh
+```
 
 # Uninstallation
 
