@@ -13,10 +13,6 @@ if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
   echo ":: Installing to $HOME/homebrew/startup_animations"
   git clone --branch feature/dev https://github.com/hummelm10/steamdeck_startup_animations "$HOME/homebrew/startup_animations"
   cd "$HOME/homebrew/startup_animations"
-else
-  echo ":: Updating $HOME/homebrew/startup_animations"
-  cd "$HOME/homebrew/startup_animations"
-  git pull
 fi
 
 # Install the service file
