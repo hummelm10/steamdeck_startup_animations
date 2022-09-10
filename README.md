@@ -1,4 +1,11 @@
 # steamdeck_startup_animations
+
+## Currently working version
+
+**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) (STABLE Branch)**
+
+&nbsp;
+
 This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added library.css and library.js file modifications following this guide https://docs.google.com/document/d/1LP3sLpi6N3NMSbqquLlY8a0ZNpFT-WRyRLiU_tm6N-k/edit from reddit user /u/Crazy89_ which you can find saved [here](docs/manual_modificaiton_steps.md)
 
 The modifications allow for:
@@ -10,8 +17,6 @@ The modifications allow for:
 A collection of steamdeck startup animations, plus a script to randomize your startup on each boot
 
 You can add/remove webms as long as theyre exactly 1840847 bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory. The service uses the find command to randomly select one from that folder. 
-
-**NOTE: library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) and I will update if needed. As of now I am only maintaining the STABLE branch**
 
 The script with the most recent update dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. This should hopefully help keep this modification working even with OS updates but will be tested when the next update comes out. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
 
