@@ -11,7 +11,7 @@ else
 fi
 
 echo "Pulling Updates..."
-git pull
+git pull --verbose
 
 echo "Restoring deck_startup/"
 rm -rf "$HOME/homebrew/startup_animations/deck_startup/"
