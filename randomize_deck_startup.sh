@@ -46,6 +46,7 @@ DECK_JS_STOCK_MD5="047a4968a9e81faba14727a498f45429"
 check_backup_js_css() {
   if [[ ! -f "$DECK_CSS_FILE.backup" ]]; then
     checksum="$(md5sum "$DECK_CSS_FILE" | cut -d ' ' -f 1)"
+    checksum2="$(md5sum "$DECK_CSS_FILE.backup" | cut -d ' ' -f 1)"
     if [[ "$checksum" != "$DECK_CSS_STOCK_MD5" ]]; then
       msg2 "library.css has already been modified, cannot make a backup"
     else
@@ -73,10 +74,11 @@ list_animations() {
 }
 
 random_animation() {
-  mapfile -d $'\0' animations < <(list_animations)
-  #add SEED based on pid with $$
-  RANDOM=$$
-  echo "${animations[$RANDOM % ${#animations[@]}]}"
+  list_animations | shuf -z -n 1
+  # mapfile -d $'\0' animations < <(list_animations)
+  # #add SEED based on pid with $$
+  # RANDOM=$$
+  # echo "${animations[$RANDOM % ${#animations[@]}]}"
 }
 
 mod_css() {
