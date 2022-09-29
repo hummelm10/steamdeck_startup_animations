@@ -6,6 +6,12 @@ if [[ -e "$HOME/.config/systemd/user/randomize_deck_startup.service" ]]; then
   rm "$HOME/.config/systemd/user/randomize_deck_startup.service"
 fi
 
+if [[ -e "$HOME/.config/systemd/user/randomize_deck_desktop.service" ]]; then
+  echo ":: Removing the desktop service"
+  systemctl --user disable randomize_deck_desktop.service
+  rm "$HOME/.config/systemd/user/randomize_deck_desktop.service"
+fi
+
 if [[ -f "$HOME/.steam/steam/steamui/movies/deck_startup.webm.backup" ]]; then
   echo ":: Restoring deck_startup.webm.backup"
   rm "$HOME/.steam/steam/steamui/movies/deck_startup.webm"

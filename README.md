@@ -2,7 +2,7 @@
 
 ## Currently working version
 
-**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) (STABLE Branch)**
+**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) and Steam Version 1663888700 (STABLE Branch)**
 
 &nbsp;
 
@@ -72,6 +72,15 @@ bash $HOME/homebrew/startup_animations/uninstall.sh
 
 # Issue Reporting
 Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing. 
+
+Please also submit the OS version and build and Steam version and the hashes for the modified files. You can find the hashes with the following command:
+
+```sh
+md5sum /home/deck/.steam/steamui/css/library.css
+md5sum /home/deck/.steam/steamui/css/library.css.backup
+md5sum /home/deck/.steam/steamui/library.js
+md5sum /home/deck/.steam/steamui/library.js.backup
+```
 
 # Recovery Steps
 If you do run into an issue where you cannot boot please follow the steps [here](docs/recovery_steps.md)
