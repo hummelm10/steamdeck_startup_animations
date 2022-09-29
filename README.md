@@ -18,7 +18,9 @@ A collection of steamdeck startup animations, plus a script to randomize your st
 
 You can add/remove webms as long as theyre exactly 1840847 bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory. The service uses the find command to randomly select one from that folder. 
 
-The script with the most recent update dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. This should hopefully help keep this modification working even with OS updates but will be tested when the next update comes out. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
+The script dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
+
+Two systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. If you know what you're doing you can install one or both services. 
 
 # So far, I've made boot animations from the following consoles:
 
@@ -50,6 +52,9 @@ git clone https://github.com/hummelm10/steamdeck_startup_animations "$HOME/homeb
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_startup.service" "$HOME/.config/systemd/user/randomize_deck_startup.service"
 systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_startup.service
+ln -sf "$HOME/homebrew/startup_animations/randomize_deck_desktop.service" "$HOME/.config/systemd/user/randomize_deck_desktop.service"
+systemctl --user daemon-reload
+systemctl --user enable --now randomize_deck_desktop.service
 ```
 
 If you want to risk the feature/dev branch you can do so with:
