@@ -52,7 +52,7 @@ check_backup_js_css() {
     else
       msg "Creating backup of initial library.css ($checksum)"
       cp "$DECK_CSS_FILE" "$DECK_CSS_FILE.backup"
-      cp "$DECK_CSS_FILE" "$HOME/homebrew/startup_animations/library.css.modb"
+      cp "$DECK_CSS_FILE" "$HOME/homebrew/startup_animations/library.css.mod"
     fi
   fi
 
@@ -82,12 +82,11 @@ random_animation() {
 }
 
 mod_css() {
-  if [[ ! -f "$HOME/homebrew/startup_animations/library.css.modb" ]]; then
-    cp "$DECK_CSS_FILE.backup" "$HOME/homebrew/startup_animations/library.css.modb"
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.css.mod" ]]; then
+    cp "$DECK_CSS_FILE.backup" "$HOME/homebrew/startup_animations/library.css.mod"
   fi
   DECK_CSS_FILE_SIZE=$(stat -c %s "$DECK_CSS_FILE.backup")
   msg "CSS File Size: $DECK_CSS_FILE_SIZE"
-  cp "$HOME/homebrew/startup_animations/library.css.modb" "$HOME/homebrew/startup_animations/library.css.mod"
   msg "Modifying CSS file"
   perl -p -i -e 's/^(.+?)\s(.*img\{.*?width\:)(.*?px)(.*?height\:)(.*?px)(.*?$)/${1}${2}0100%${4}0100%${6}/g' "$HOME/homebrew/startup_animations/library.css.mod"
   perl -p -i -e 's/^(.+?)\s(.*video\{.*?width\:)(.*?px)(.*?height\:)(.*?px)(.*?$)/${1}${2}0100%${4}0100%${6}/g' "$HOME/homebrew/startup_animations/library.css.mod"
@@ -102,12 +101,11 @@ mod_css() {
 }
 
 mod_js() {
-  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.modb" ]]; then
-    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.modb"
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.mod" ]]; then
+    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.mod"
   fi
   DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
   msg "JS File Size: $DECK_JS_FILE_SIZE"
-  cp "$HOME/homebrew/startup_animations/library.js.modb" "$HOME/homebrew/startup_animations/library.js.mod"
   msg "Modifying JS file"
   sed -i -E 's/(.*return Object\(f\.y\)\()(i,1e4)(.*$)|(.*return Object\(0,g\.KS\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
   msg "Modified time limit"
