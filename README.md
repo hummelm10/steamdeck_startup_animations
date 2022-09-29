@@ -2,7 +2,7 @@
 
 ## Currently working version
 
-**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) (STABLE Branch)**
+**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) and Steam Version 1663888700 (STABLE Branch)**
 
 &nbsp;
 
