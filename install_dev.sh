@@ -16,8 +16,13 @@ if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
 fi
 
 # Install the service file
-echo ":: Installing the startup service"
+echo ":: Installing the device startup service"
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_startup.service" "$HOME/.config/systemd/user/randomize_deck_startup.service"
 systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_startup.service
+
+echo ":: Installing the desktop startup service"
+ln -sf "$HOME/homebrew/startup_animations/randomize_deck_desktop.service" "$HOME/.config/systemd/user/randomize_deck_desktop.service"
+systemctl --user daemon-reload
+systemctl --user enable --now randomize_deck_desktop.service
 
