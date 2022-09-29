@@ -37,16 +37,18 @@ check_backup() {
 }
 
 DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
-DECK_CSS_STOCK_MD5="22d52af1fc507209fef4cf72a7a234d4 1540f8c3a3944590c5892b0947ce43e6"
+#previous hashes 22d52af1fc507209fef4cf72a7a234d4
+DECK_CSS_STOCK_MD5="1540f8c3a3944590c5892b0947ce43e6"
 
 DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
-DECK_JS_STOCK_MD5="047a4968a9e81faba14727a498f45429 ee49f2778c8af821590ca6899260cccf"
+#previous hashes 047a4968a9e81faba14727a498f45429
+DECK_JS_STOCK_MD5="ee49f2778c8af821590ca6899260cccf"
 
 check_backup_js_css() {
   if [[ ! -f "$DECK_CSS_FILE.backup" ]]; then
     checksum="$(md5sum "$DECK_CSS_FILE" | cut -d ' ' -f 1)"
     checksum2="$(md5sum "$DECK_CSS_FILE.backup" | cut -d ' ' -f 1)"
-    if echo $DECK_CSS_STOCK_MD5 | grep -w $checksum > /dev/null; then
+    if [[ "$checksum" != "$DECK_CSS_STOCK_MD5" ]]; then
       msg2 "library.css has already been modified, cannot make a backup"
     else
       msg "Creating backup of initial library.css ($checksum)"
@@ -57,7 +59,7 @@ check_backup_js_css() {
 
   if [[ ! -f "$DECK_JS_FILE.backup" ]]; then
     checksum="$(md5sum "$DECK_JS_FILE" | cut -d ' ' -f 1)"
-    if echo $DECK_JS_STOCK_MD5 | grep -w $checksum > /dev/null; then
+    if [[ "$checksum" != "$DECK_JS_STOCK_MD5" ]]; then
       msg2 "library.js has already been modified, cannot make a backup"
       cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.modb"
     else
