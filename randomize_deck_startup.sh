@@ -108,7 +108,7 @@ mod_js() {
   DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
   msg "JS File Size: $DECK_JS_FILE_SIZE"
   msg "Modifying JS file"
-  sed -i -E 's/(.*return Object\(f\.y\)\()(i,1e4)(.*$)|(.*return Object\(0,g\.KS\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  perl -p -i -e 's/(.*return Object\(0,g\.KS\)\()(i,1e4)(.*$)/${1}i,9e9${3}/' "$HOME/homebrew/startup_animations/library.js.mod"
   msg "Modified time limit"
   sed -i -E -E 's/(.*)(HapticEvent\(0,2,6,2,0\))(.*$)/\1HapticEvent\(0,0,0,0,0\)\3/' "$HOME/homebrew/startup_animations/library.js.mod"
   truncate -s $DECK_JS_FILE_SIZE "$HOME/homebrew/startup_animations/library.js.mod"
