@@ -76,7 +76,9 @@ bash $HOME/homebrew/startup_animations/uninstall.sh
 ```
 
 # Issue Reporting
-Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing. 
+Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing for startup animation issues. 
+
+Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizerDesktop` in Konsole in your bug report along with a description of the behavior your are seeing for return to game mode animation issues. 
 
 Please also submit the OS version and build and Steam version and the hashes for the modified files. You can find the hashes with the following command:
 
