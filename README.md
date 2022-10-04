@@ -16,9 +16,9 @@ The modifications allow for:
 
 A collection of steamdeck startup animations, plus a script to randomize your startup on each boot
 
-You can add/remove webms as long as theyre exactly 1840847 bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
-Files not matching the exact size are ignored during the random selection process.
-The service uses the find command to randomly select one from that folder.
+You can add/remove webms as long as theyre exactly `1840847` bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
+Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
+The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
 
 If you have files smaller than the exact size in the `deck_startup` folder, run the `truncate_videos.sh` utility script to enlarge them accordingly.
 Additionally, it will warn you if there are any webm files larger than the size - those you'll have to reencode and compress more, or truncate yourself and lose the end of the video.
@@ -29,9 +29,9 @@ Two systemd services are installed. One runs on device start which rotates the a
 
 ## Prioritizing videos
 
-You may also increase the chances of some videos to be played during boot by optionally adding an optional parameter within the file names. The syntax is quite simple: `<name>.<chance>.webm`, e.g. `better-call-saul.69.webm` or `star-wars-disneyplus.420.webm`.  
+You may also increase the chances of some videos to be played during boot by adding an optional "parameter" within the file names. The syntax is quite simple: `<name>.<chance>.webm`, e.g. `better-call-saul.69.webm` or `star-wars-disneyplus.420.webm`.  
 By default each video has a chance of `1` to be selected as boot animation, i.e. the chances are equal and in long term you should not see one specific video significantly more often than others (unless you only have one).
-With a higher chancee number in the file name the chance of the video to be selected rises. The increase is relative to the amount of videos in the folder and their respective chances.
+With a higher chance number in the file name the chance of the video to be selected rises. The increase is relative to the amount of videos in the folder and their respective chances.
 
 Example:  
 You have 4 videos with the following names:
@@ -42,10 +42,10 @@ You have 4 videos with the following names:
 
 The chances summed up are **8**:
 - **1** for each `hello-there` (by default in this case) and `those_bastards_lied_to_me`,
-- **2**  for `dindu.nuffin` and
-- **4**  for `seymour waiting for fry`.
+- **2** for `dindu.nuffin` and
+- **4** for `seymour waiting for fry`.
 
-This means the first two videos have only 12.5% chance to play each, the third 25% and the last one 50%. In the long run they should play in those ratios.
+This means the first two videos have only a 12.5% chance to play each, the third 25% and the last one 50%. In the long run they should play in those ratios.
 
 # So far, I've made boot animations from the following consoles:
 
