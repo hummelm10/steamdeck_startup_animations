@@ -71,11 +71,22 @@ check_backup_js_css() {
 }
 
 list_animations() {
-  find ./deck_startup/ -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm' -print0
+  find ./deck_startup/ -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm'
 }
 
 random_animation() {
-  list_animations | shuf -z -n 1
+  # for each listed file
+  list_animations | while IFS= read -r file; do
+    repeat=1
+    # check if it has a number at the end, e.g. some-animation.5.webm
+    if [[ $file =~ .*\.([0-9]+)\.[A-Za-z0-9]+$ ]]; then
+      repeat="${BASH_REMATCH[1]}"
+    fi
+    # and repeat the file said number of times, increasing its chance
+    yes "$file" | head -n $repeat
+  done | shuf -n 1
+  # in the end, shuffle the list of files (including repetitions) and select first
+
   # mapfile -d $'\0' animations < <(list_animations)
   # #add SEED based on pid with $$
   # RANDOM=$$
