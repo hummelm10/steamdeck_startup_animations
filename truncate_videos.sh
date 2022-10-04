@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DECK_STARTUP_FILE_SIZE=1840847
+. ./constants
 
 SMALLER_FILES="$(find ./deck_startup/ -type f -iname "*.webm" -size "-${DECK_STARTUP_FILE_SIZE}c")"
 if [ "$(echo "$SMALLER_FILES" | wc -l)" -gt 0 ] && [ "$SMALLER_FILES" != "" ]; then

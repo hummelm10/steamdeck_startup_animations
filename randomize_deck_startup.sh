@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
 
-Color_Off='\033[0m'       # Text Reset
-
-# Regular Colors
-Black='\033[0;30m'        # Black
-Red='\033[0;31m'          # Red
-Green='\033[0;32m'        # Green
-Yellow='\033[0;33m'       # Yellow
-Blue='\033[0;34m'         # Blue
-Purple='\033[0;35m'       # Purple
-Cyan='\033[0;36m'         # Cyan
-White='\033[0;37m'        # White
+. ./constants
 
 msg() {
   echo -e ":: ${@}$Color_Off"
@@ -19,10 +9,6 @@ msg() {
 msg2() {
   echo -e "$Red!!$Color_Off ${@}$Color_Off"
 }
-
-DECK_STARTUP_FILE="/home/deck/.steam/steam/steamui/movies/deck_startup.webm"
-DECK_STARTUP_FILE_SIZE=1840847
-DECK_STARTUP_STOCK_MD5="4ee82f478313cf74010fc22501b40729"
 
 check_backup() {
   if [[ ! -f "$DECK_STARTUP_FILE.backup" ]]; then
@@ -35,14 +21,6 @@ check_backup() {
     fi
   fi
 }
-
-DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
-#previous hashes 22d52af1fc507209fef4cf72a7a234d4
-DECK_CSS_STOCK_MD5="1540f8c3a3944590c5892b0947ce43e6"
-
-DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
-#previous hashes 047a4968a9e81faba14727a498f45429
-DECK_JS_STOCK_MD5="ee49f2778c8af821590ca6899260cccf"
 
 check_backup_js_css() {
   if [[ ! -f "$DECK_CSS_FILE.backup" ]]; then
