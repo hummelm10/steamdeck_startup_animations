@@ -2,15 +2,13 @@
 
 ## What's new in v2.0
 
-Valve 
+Valve has listened to the community and has made it easier by creating a dedicated way to use custom animations. This project has been modified to use that feature and as such will be more stable with future updates and won't have to be fixed each time there's a client update with new hashes and regex's. A new service has also been added to randomize the suspend animation on each resume and before each suspend so you can have all the custom animations you want. 
 
 &nbsp;
 
 This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
 
-A collection of steamdeck startup animations, plus a script to randomize your startup on each boot. 
-
-The script dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
+A collection of steamdeck startup animations, plus a script to randomize your startup and suspend animations. 
 
 Three systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. A third service randomizes the suspend animation for those who don't like shutting down to see the coolness. 
 ### For startup/shutdown/and return to gamemode animations 
