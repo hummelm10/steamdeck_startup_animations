@@ -23,9 +23,9 @@ if [[ -f "$HOME/.steam/steam/steamui/overrides/movies/deck_startup.webm" ]]; the
   rm "$HOME/.steam/steam/steamui/overrides/movies/deck_startup.webm"
 fi
 
-if [[ -f "$HOME/.steam/steam/steamui/overrides/movies/deck_suspend.webm" ]]; then
-  echo ":: Deleting overrides deck_suspend.webm"
-  rm "$HOME/.steam/steam/steamui/overrides/movies/deck_suspend.webm"
+if [[ -f "$HOME/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm" ]]; then
+  echo ":: Deleting overrides deck-suspend-animation.webm"
+  rm "$HOME/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm"
 fi
 
 if [[ -e "$HOME/homebrew/startup_animations" ]]; then

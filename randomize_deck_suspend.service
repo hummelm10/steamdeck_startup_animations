@@ -1,5 +1,5 @@
 [Unit]
-Description=Randomize deck_suspend.webm after boot
+Description=Randomize deck-suspend-animation.webm after resume and before suspend
 Before=sleep.target
 StopWhenUnneeded=yes
 
