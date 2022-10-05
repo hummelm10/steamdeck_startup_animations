@@ -26,3 +26,8 @@ echo ":: Reinstalling the desktop startup service"
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_desktop.service" "$HOME/.config/systemd/user/randomize_deck_desktop.service"
 systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_desktop.service
+
+echo ":: Reinstalling the suspend service"
+ln -sf "$HOME/homebrew/startup_animations/randomize_deck_suspend.service" "$HOME/.config/systemd/user/randomize_deck_suspend.service"
+systemctl --user daemon-reload
+systemctl --user enable --now randomize_deck_desktop.service

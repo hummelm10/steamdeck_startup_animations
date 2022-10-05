@@ -1,31 +1,34 @@
-# steamdeck_startup_animations
+# steamdeck_startup_animations v2.0
 
-## Currently working version
+## What's new in v2.0
 
-**library.css and library.js is working for SteamOS 3.3.1 (build 20220817.1) and Steam Version 1663888700 (STABLE Branch)**
+Valve 
 
 &nbsp;
 
-This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added library.css and library.js file modifications following this guide https://docs.google.com/document/d/1LP3sLpi6N3NMSbqquLlY8a0ZNpFT-WRyRLiU_tm6N-k/edit from reddit user /u/Crazy89_ which you can find saved [here](docs/manual_modificaiton_steps.md)
+This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
 
-The modifications allow for:
-* Full screen animations
-* Changes how they fade out to make the boot transition smoother
-* Removes the 10 second webm animation limit
-* Removes the haptics on boot
+A collection of steamdeck startup animations, plus a script to randomize your startup on each boot. 
 
-A collection of steamdeck startup animations, plus a script to randomize your startup on each boot
+The script dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
 
+Three systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. A third service randomizes the suspend animation for those who don't like shutting down to see the coolness. 
+### For startup/shutdown/and return to gamemode animations 
 You can add/remove webms as long as theyre exactly `1840847` bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
 Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
 The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
 
-If you have files smaller than the exact size in the `deck_startup` folder, run the `truncate_videos.sh` utility script to enlarge them accordingly.
+
+### For suspend animations 
+You can add/remove webms as long as theyre exactly `160008` bytes to the `/home/deck/homebrew/startup_animations/deck_suspend` directory.
+Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
+The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
+
+
+
+If you have files smaller than the exact size in the `deck_startup` or `deck_suspend` folder, run the `truncate_videos.sh` utility script to enlarge them accordingly.
 Additionally, it will warn you if there are any webm files larger than the size - those you'll have to reencode and compress more, or truncate yourself and lose the end of the video.
 
-The script dynamically polls the original files for the file size and uses regex to find/replace the values needed in the file after making backups. You are using this at your own risk and you should try and understand what it does. I will do my best however to make sure it works.
-
-Two systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. If you know what you're doing you can install one or both services. 
 
 ## Prioritizing videos
 
@@ -80,6 +83,9 @@ systemctl --user enable --now randomize_deck_startup.service
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_desktop.service" "$HOME/.config/systemd/user/randomize_deck_desktop.service"
 systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_desktop.service
+ln -sf "$HOME/homebrew/startup_animations/randomize_deck_suspend.service" "$HOME/.config/systemd/user/randomize_deck_suspend.service"
+systemctl --user daemon-reload
+systemctl --user enable --now randomize_deck_suspend.service
 ```
 
 If you want to risk the feature/dev branch you can do so with:
@@ -101,21 +107,13 @@ bash $HOME/homebrew/startup_animations/uninstall.sh
 ```
 
 # Issue Reporting
-Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing for startup animation issues. 
+Please include the journalctl logs using the output from `journalctl -n 100 --no-pager -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing for startup animation issues. 
 
-Please include the journalctl logs using the output from `journalctl -e SYSLOG_IDENTIFIER=bootWebmRandomizerDesktop` in Konsole in your bug report along with a description of the behavior your are seeing for return to game mode animation issues. 
+Please include the journalctl logs using the output from `journalctl -n 100 --no-pager -e SYSLOG_IDENTIFIER=bootWebmRandomizerDesktop` in Konsole in your bug report along with a description of the behavior your are seeing for return to game mode animation issues. 
 
-Please also submit the OS version and build and Steam version and the hashes for the modified files. You can find the hashes with the following command:
+Please include the journalctl logs using the output from `journalctl -n 100 --no-pager -e SYSLOG_IDENTIFIER=suspendWebmRandomizerDesktop` in Konsole in your bug report along with a description of the behavior your are seeing for suspend animation issues. 
 
-```sh
-md5sum /home/deck/.steam/steamui/css/library.css
-md5sum /home/deck/.steam/steamui/css/library.css.backup
-md5sum /home/deck/.steam/steamui/library.js
-md5sum /home/deck/.steam/steamui/library.js.backup
-```
-
-# Recovery Steps
-If you do run into an issue where you cannot boot please follow the steps [here](docs/recovery_steps.md)
+Please also submit the OS version and build and Steam version.
 
 # Making an animation (somewhat advanced)
 
