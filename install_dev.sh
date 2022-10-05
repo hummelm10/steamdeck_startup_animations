@@ -15,6 +15,11 @@ if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
   cd "$HOME/homebrew/startup_animations"
 fi
 
+if [[ ! -d "$HOME/.steam/steam/steamui/overrides" ]]; then
+  echo ":: Making overrides directory $HOME/.steam/steam/steamui/overrides"
+  mkdir "$HOME/.steam/steam/steamui/overrides"
+fi
+
 # Install the service file
 echo ":: Installing the device startup service"
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_startup.service" "$HOME/.config/systemd/user/randomize_deck_startup.service"
