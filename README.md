@@ -91,7 +91,7 @@ curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animatio
 # Updating
 To update run the following. This will preserve whatever is in `/home/deck/homebrew/startup_animations/deck_startup` and will not overwrite any files. 
 ```sh
-bash $HOME/homebrew/startup_animations/update.sh
+curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animations/main/update.sh | bash -
 ```
 
 # Uninstallation
