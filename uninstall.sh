@@ -28,6 +28,11 @@ if [[ -f "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.web
   rm "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm"
 fi
 
+if [[ -f "$HOME/.steam/steam/steamui/library.js.backup" ]]; then
+  echo ":: Restoring js file"
+  mv "$HOME/.steam/steam/steamui/library.js.backup" "$HOME/.steam/steam/steamui/library.js"
+fi
+
 if [[ -e "$HOME/homebrew/startup_animations" ]]; then
   echo ":: Deleting the startup_animations directory"
   rm -rf "$HOME/homebrew/startup_animations"
