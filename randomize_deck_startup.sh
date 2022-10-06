@@ -28,18 +28,30 @@ random_animation() {
   # in the end, shuffle the list of files (including repetitions) and select first
 }
 
-check_backup_js() {
+check_js() {
   if [[ ! -f "$DECK_JS_FILE.backup" ]]; then
-    msg "Creating backup of initial library.js ($checksum)"
     cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
-    cp "$DECK_JS_FILE" "$HOME/homebrew/startup_animations/library.js.mod"
+  fi
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.mod" ]]; then
+    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.mod"
+  fi
+  checksum="$(md5sum "$DECK_JS_FILE" | cut -d ' ' -f 1)"
+  checksum1="$(md5sum "$HOME/homebrew/startup_animations/library.js.mod" | cut -d ' ' -f 1)"
+  if [[ "$checksum" != "$checksum1" ]]; then #check if og file and mod file match
+    if [[ -f "$DECK_JS_FILE.backup" ]]; then #if they dont check if backup exists
+      checksum1="$(md5sum "$DECK_JS_FILE.backup" | cut -d ' ' -f 1)"
+      if [[ "$checksum" == "$checksum1" ]]; then #check if backup and og match
+        msg2 "New JS File, check regex" 
+      fi
+    fi
+    msg "Creating backup of library.js ($checksum)"
+    cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup" #will be used to compare next boot, if these match but the mod file doesn then file is being overwritten
+    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.mod" #still attempt to modify it if this is the first time the file is written
   fi
 }
 
 mod_js() {
-  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.mod" ]]; then
-    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.mod"
-  fi
+  check_js
   DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
   msg "JS File Size: $DECK_JS_FILE_SIZE"
   msg "Modifying JS file"
@@ -52,7 +64,6 @@ mod_js() {
   msg "Linked modified JS file"
 }
 
-check_backup_js
 mod_js
 
 if [[ ! -z "$(list_animations)" ]]; then
