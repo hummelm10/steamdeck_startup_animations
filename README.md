@@ -6,9 +6,9 @@ Valve has listened to the community and has made it easier by creating a dedicat
 
 **NOTE: You can't update from 1.0 to 2.0. You'll need to uninstall and reinstall again. Just backup your animations to another folder before doing so. This is due to how some of the files are being handled now so the originals need to be replaced and then modified again.**
 
-This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
+&nbsp;
 
-A collection of steamdeck startup animations, plus a script to randomize your startup and suspend animations. 
+This was originally forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
 
 Three systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. A third service randomizes the suspend animation for those who don't like shutting down to see the coolness. 
 
@@ -30,7 +30,7 @@ If you have files smaller than the exact size in the `deck_startup` or `deck_sus
 Additionally, it will warn you if there are any webm files larger than the size - those you'll have to reencode and compress more, or truncate yourself and lose the end of the video.
 
 
-## Prioritizing videos
+## Prioritizing videos:
 
 You may also increase the chances of some videos to be played during boot by adding an optional "parameter" within the file names. The syntax is quite simple: `<name>.<chance>.webm`, e.g. `better-call-saul.69.webm` or `star-wars-disneyplus.420.webm`.  
 By default each video has a chance of `1` to be selected as boot animation, i.e. the chances are equal and in long term you should not see one specific video significantly more often than others (unless you only have one).
