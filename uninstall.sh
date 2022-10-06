@@ -12,21 +12,24 @@ if [[ -e "$HOME/.config/systemd/user/randomize_deck_desktop.service" ]]; then
   rm "$HOME/.config/systemd/user/randomize_deck_desktop.service"
 fi
 
-if [[ -f "$HOME/.steam/steam/steamui/movies/deck_startup.webm.backup" ]]; then
-  echo ":: Restoring deck_startup.webm.backup"
-  rm "$HOME/.steam/steam/steamui/movies/deck_startup.webm"
-  mv "$HOME/.steam/steam/steamui/movies/deck_startup.webm.backup" "$HOME/.steam/steam/steamui/movies/deck_startup.webm"
+if [[ -e "$HOME/.config/systemd/user/randomize_deck_suspend.service" ]]; then
+  echo ":: Removing the desktop service"
+  systemctl --user disable randomize_deck_suspend.service
+  rm "$HOME/.config/systemd/user/randomize_deck_suspend.service"
 fi
 
-if [[ -f "$HOME/.steam/steam/steamui/css/library.css.backup" ]]; then
-  echo ":: Restoring library.css.backup"
-  rm "$HOME/.steam/steam/steamui/css/library.css"
-  mv "$HOME/.steam/steam/steamui/css/library.css" "$HOME/.steam/steam/steamui/css/library.css"
+if [[ -f "$HOME/.steam/root/config/uioverrides/movies/deck_startup.webm" ]]; then
+  echo ":: Deleting overrides deck_startup.webm"
+  rm "$HOME/.steam/root/config/uioverrides/movies/deck_startup.webm"
+fi
+
+if [[ -f "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm" ]]; then
+  echo ":: Deleting overrides deck-suspend-animation.webm"
+  rm "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm"
 fi
 
 if [[ -f "$HOME/.steam/steam/steamui/library.js.backup" ]]; then
-  echo ":: Restoring library.js.backup"
-  rm "$HOME/.steam/steam/steamui/library.js"
+  echo ":: Restoring js file"
   mv "$HOME/.steam/steam/steamui/library.js.backup" "$HOME/.steam/steam/steamui/library.js"
 fi
 

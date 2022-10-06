@@ -1,4 +1,4 @@
-# Instructions for library.css/js modification
+# Instructions for library.css/js modification (NO LONGER NEEDED)
 
 Saving this for future reference in case SteamOS updates the files. 
 
