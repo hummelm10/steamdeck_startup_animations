@@ -127,7 +127,7 @@ Please also submit the OS version and build and Steam version.
 
 # Making Animations
 
-Somewhat advanced, but the steps to making your own animations are (here)[docs/making_animations.md].
+Somewhat advanced, but the steps to making your own animations are [here](docs/making_animations.md).
 
 # Credits
 Thanks to those I forked this from and who have submitted PRs:
