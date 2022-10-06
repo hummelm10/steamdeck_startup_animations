@@ -28,7 +28,9 @@ random_animation() {
   # in the end, shuffle the list of files (including repetitions) and select first
 }
 
-animation="$(random_animation)"
-msg "Using $animation"
-ln -f "$animation" "$DECK_SUSPEND_FILE"
+if [[ ! -z "$(list_animations)" ]]
+  animation="$(random_animation)"
+  msg "Using $animation"
+  ln -f "$animation" "$DECK_SUSPEND_FILE"
+fi
 

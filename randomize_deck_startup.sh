@@ -55,7 +55,9 @@ mod_js() {
 check_backup_js
 mod_js
 
-animation="$(random_animation)"
-msg "Using $animation"
-ln -f "$animation" "$DECK_STARTUP_FILE"
+if [[ ! -z "$(list_animations)" ]]
+  animation="$(random_animation)"
+  msg "Using $animation"
+  ln -f "$animation" "$DECK_STARTUP_FILE"
+fi
 
