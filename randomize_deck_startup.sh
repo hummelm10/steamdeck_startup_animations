@@ -11,7 +11,7 @@ msg2() {
 }
 
 list_animations() {
-  find ./deck_startup/ -type f -size "${DECK_STARTUP_FILE_SIZE}c" -iname '*.webm'
+  find ./deck_startup/ -type f -size -iname '*.webm'
 }
 
 random_animation() {
@@ -27,6 +27,33 @@ random_animation() {
   done | shuf -n 1
   # in the end, shuffle the list of files (including repetitions) and select first
 }
+
+check_backup_js() {
+  if [[ ! -f "$DECK_JS_FILE.backup" ]]; then
+    msg "Creating backup of initial library.js ($checksum)"
+    cp "$DECK_JS_FILE" "$DECK_JS_FILE.backup"
+    cp "$DECK_JS_FILE" "$HOME/homebrew/startup_animations/library.js.mod"
+  fi
+}
+
+mod_js() {
+  if [[ ! -f "$HOME/homebrew/startup_animations/library.js.mod" ]]; then
+    cp "$DECK_JS_FILE.backup" "$HOME/homebrew/startup_animations/library.js.mod"
+  fi
+  DECK_JS_FILE_SIZE=$(stat -c %s "$DECK_JS_FILE.backup")
+  msg "JS File Size: $DECK_JS_FILE_SIZE"
+  msg "Modifying JS file"
+  sed -i -E 's/(.*return\(0,g\.KS\)\()(i,1e4)(.*$)/\1i,9e9\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Modified time limit"
+  sed -i -E -E 's/(.*)(HapticEvent\(0,2,6,2,0\))(.*$)/\1HapticEvent\(0,0,0,0,0\)\3/' "$HOME/homebrew/startup_animations/library.js.mod"
+  truncate -s $DECK_JS_FILE_SIZE "$HOME/homebrew/startup_animations/library.js.mod"
+  msg "Disabled boot haptics"
+  ln -f "$HOME/homebrew/startup_animations/library.js.mod" "$DECK_JS_FILE"
+  msg "Linked modified JS file"
+}
+
+check_backup_js
+mod_js
 
 animation="$(random_animation)"
 msg "Using $animation"

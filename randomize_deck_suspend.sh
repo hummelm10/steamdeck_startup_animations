@@ -11,7 +11,7 @@ msg2() {
 }
 
 list_animations() {
-  find ./deck_suspend/ -type f -size "${DECK_SUSPEND_FILE_SIZE}c" -iname '*.webm'
+  find ./deck_suspend/ -type f -iname '*.webm'
 }
 
 random_animation() {

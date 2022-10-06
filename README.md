@@ -4,6 +4,8 @@
 
 Valve has listened to the community and has made it easier by creating a dedicated way to use custom animations. This project has been modified to use that feature and as such will be more stable with future updates and won't have to be fixed each time there's a client update with new hashes and regex's. A new service has also been added to randomize the suspend animation on each resume and before each suspend so you can have all the custom animations you want. 
 
+**NOTE: You can't update from 1.0 to 2.0. You'll need to uninstall and reinstall again. Just backup your animations to another folder before doing so. This is due to how some of the files are being handled now so the originals need to be replaced and then modified again.**
+
 &nbsp;
 
 This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
