@@ -16,13 +16,11 @@ Three systemd services are installed. One runs on device start which rotates the
 
 # Adding your files
 ## **For startup/shutdown/and return to gamemode animations:**
-You can add/remove webms as long as theyre exactly `1840847` bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
-Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
+You can add/remove webms to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
 The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
 
 ## **For suspend animations:**
-You can add/remove webms as long as theyre exactly `160008` bytes to the `/home/deck/homebrew/startup_animations/deck_suspend` directory.
-Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
+You can add/remove webms to the `/home/deck/homebrew/startup_animations/deck_suspend` directory. 
 The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
 
 
