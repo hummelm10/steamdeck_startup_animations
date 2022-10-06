@@ -11,7 +11,7 @@ msg2() {
 }
 
 list_animations() {
-  find ./deck_startup/ -type f -size -iname '*.webm'
+  find ./deck_startup/ -type f -iname '*.webm'
 }
 
 random_animation() {
