@@ -13,8 +13,10 @@ Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
 
-DECK_STARTUP_FILE="/home/deck/.steam/steam/steamui/overrides/movies/deck_startup.webm"
+DECK_STARTUP_FILE="$HOME/.steam/root/config/uioverrides/movies/deck_startup.webm"
 DECK_STARTUP_FILE_SIZE=1840847
 
-DECK_SUSPEND_FILE="/home/deck/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm"
+DECK_SUSPEND_FILE="$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm"
 DECK_SUSPEND_FILE_SIZE=160008
+
+DECK_JS_FILE="$HOME/.steam/steam/steamui/library.js"
