@@ -6,24 +6,24 @@ Valve has listened to the community and has made it easier by creating a dedicat
 
 **NOTE: You can't update from 1.0 to 2.0. You'll need to uninstall and reinstall again. Just backup your animations to another folder before doing so. This is due to how some of the files are being handled now so the originals need to be replaced and then modified again.**
 
-&nbsp;
-
 This was forked from https://github.com/kageurufu/steamdeck_startup_animations and added additional services and options for swapping files. 
 
 A collection of steamdeck startup animations, plus a script to randomize your startup and suspend animations. 
 
 Three systemd services are installed. One runs on device start which rotates the animation with each startup. A second service runs every time you switch to desktop mode so when you log off from desktop mode you get a new animation into game mode. A third service randomizes the suspend animation for those who don't like shutting down to see the coolness. 
-### For startup/shutdown/and return to gamemode animations 
+
+&nbsp;
+
+# Adding your files
+## **For startup/shutdown/and return to gamemode animations:**
 You can add/remove webms as long as theyre exactly `1840847` bytes to the `/home/deck/homebrew/startup_animations/deck_startup` directory.
 Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
 The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
 
-
-### For suspend animations 
+## **For suspend animations:**
 You can add/remove webms as long as theyre exactly `160008` bytes to the `/home/deck/homebrew/startup_animations/deck_suspend` directory.
 Files not matching the exact size or not ending with `.webm` are ignored during the random selection process.
 The service uses the `find` command to discover the files, which also works recursively, so don't hesitate to organize your videos in more subfolders.
-
 
 
 If you have files smaller than the exact size in the `deck_startup` or `deck_suspend` folder, run the `truncate_videos.sh` utility script to enlarge them accordingly.
@@ -50,6 +50,8 @@ The chances summed up are **8**:
 
 This means the first two videos have only a 12.5% chance to play each, the third 25% and the last one 50%. In the long run they should play in those ratios.
 
+&nbsp;
+
 # So far, I've made boot animations from the following consoles:
 
 * dreamcast
@@ -64,6 +66,8 @@ This means the first two videos have only a 12.5% chance to play each, the third
 * xbox
 * xbox 360
 * xbox one
+
+&nbsp;
 
 # Installation
 
@@ -94,17 +98,21 @@ curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animatio
 ```
 (There's a chance the feature/dev branch will soft brick your device since I'm still working on it. Don't do unless you know what you're doing. However, there is a chance at recovery if you boot from a USB and manually restore the css and js files and remove the startup script.)
 
+&nbsp;
+
 # Updating
 To update run the following. This will preserve whatever is in `/home/deck/homebrew/startup_animations/deck_startup` and will not overwrite any files. 
 ```sh
 curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animations/main/update.sh | bash -
 ```
+&nbsp;
 
 # Uninstallation
 
 ```sh
 bash $HOME/homebrew/startup_animations/uninstall.sh
 ```
+&nbsp;
 
 # Issue Reporting
 Please include the journalctl logs using the output from `journalctl -n 100 --no-pager -e SYSLOG_IDENTIFIER=bootWebmRandomizer` in Konsole in your bug report along with a description of the behavior your are seeing for startup animation issues. 
@@ -114,6 +122,8 @@ Please include the journalctl logs using the output from `journalctl -n 100 --no
 Please include the journalctl logs using the output from `journalctl -n 100 --no-pager -e SYSLOG_IDENTIFIER=suspendWebmRandomizerDesktop` in Konsole in your bug report along with a description of the behavior your are seeing for suspend animation issues. 
 
 Please also submit the OS version and build and Steam version.
+
+&nbsp;
 
 # Making an animation (somewhat advanced)
 
@@ -163,6 +173,8 @@ The ffmpeg command is a bit confusing, so heres a breakdown
   `force_original_aspect_ratio=decrease` scales to fit within a given size, keeping the original aspect ratio  
   `pad=1280:800:(ow-iw)/2:(oh-ih)/2` pad the video size to 1280:800, centering the original video. This is optional and I might not use it in the future
 * `-c:v vp9 c:a libvorbis` Select our output VP9 / vorbis codecs
+
+&nbsp;
 
 # Credits
 Thanks to those I forked this from and who have submitted PRs:
