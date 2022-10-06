@@ -15,6 +15,11 @@ if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
   cd "$HOME/homebrew/startup_animations"
 fi
 
+if [[ ! -d "$HOME/.steam/steam/steamui/overrides" ]]; then
+  echo ":: Making overrides directory $HOME/.steam/steam/steamui/overrides"
+  mkdir "$HOME/.steam/steam/steamui/overrides"
+fi
+
 # Install the service file
 echo ":: Installing the device startup service"
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_startup.service" "$HOME/.config/systemd/user/randomize_deck_startup.service"
@@ -23,5 +28,10 @@ systemctl --user enable --now randomize_deck_startup.service
 
 echo ":: Installing the desktop startup service"
 ln -sf "$HOME/homebrew/startup_animations/randomize_deck_desktop.service" "$HOME/.config/systemd/user/randomize_deck_desktop.service"
+systemctl --user daemon-reload
+systemctl --user enable --now randomize_deck_desktop.service
+
+echo ":: Installing the suspend service"
+ln -sf "$HOME/homebrew/startup_animations/randomize_deck_suspend.service" "$HOME/.config/systemd/user/randomize_deck_suspend.service"
 systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_desktop.service

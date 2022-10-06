@@ -13,14 +13,8 @@ Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White
 
 
-DECK_STARTUP_FILE="/home/deck/.steam/steam/steamui/movies/deck_startup.webm"
+DECK_STARTUP_FILE="/home/deck/.steam/steam/steamui/overrides/movies/deck_startup.webm"
 DECK_STARTUP_FILE_SIZE=1840847
-DECK_STARTUP_STOCK_MD5="4ee82f478313cf74010fc22501b40729"
 
-DECK_CSS_FILE="/home/deck/.steam/steam/steamui/css/library.css"
-#previous hashes 22d52af1fc507209fef4cf72a7a234d4
-DECK_CSS_STOCK_MD5="1540f8c3a3944590c5892b0947ce43e6"
-
-DECK_JS_FILE="/home/deck/.steam/steam/steamui/library.js"
-#previous hashes 047a4968a9e81faba14727a498f45429
-DECK_JS_STOCK_MD5="ee49f2778c8af821590ca6899260cccf"
+DECK_SUSPEND_FILE="/home/deck/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm"
+DECK_SUSPEND_FILE_SIZE=160008

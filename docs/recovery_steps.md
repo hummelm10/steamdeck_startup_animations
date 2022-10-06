@@ -1,4 +1,4 @@
-# Recovery Steps
+# Recovery Steps (NO LONGER NEEDED)
 If your system begins to hang on boot or you start running into issues you can manually restore the original boot files with these steps.
 
 1. Create a USB recovery drive following Valve's instructions [here](https://help.steampowered.com/en/faqs/view/1B71-EDF2-EB6D-2BB3)
