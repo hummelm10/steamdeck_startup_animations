@@ -18,14 +18,14 @@ if [[ -e "$HOME/.config/systemd/user/randomize_deck_suspend.service" ]]; then
   rm "$HOME/.config/systemd/user/randomize_deck_suspend.service"
 fi
 
-if [[ -f "$HOME/.steam/steam/steamui/overrides/movies/deck_startup.webm" ]]; then
+if [[ -f "$HOME/.steam/root/config/uioverrides/movies/deck_startup.webm" ]]; then
   echo ":: Deleting overrides deck_startup.webm"
-  rm "$HOME/.steam/steam/steamui/overrides/movies/deck_startup.webm"
+  rm "$HOME/.steam/root/config/uioverrides/movies/deck_startup.webm"
 fi
 
-if [[ -f "$HOME/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm" ]]; then
+if [[ -f "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm" ]]; then
   echo ":: Deleting overrides deck-suspend-animation.webm"
-  rm "$HOME/.steam/steam/steamui/overrides/movies/deck-suspend-animation.webm"
+  rm "$HOME/.steam/root/config/uioverrides/movies/deck-suspend-animation.webm"
 fi
 
 if [[ -e "$HOME/homebrew/startup_animations" ]]; then
