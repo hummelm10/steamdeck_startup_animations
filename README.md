@@ -162,4 +162,8 @@ The ffmpeg command is a bit confusing, so heres a breakdown
   `pad=1280:800:(ow-iw)/2:(oh-ih)/2` pad the video size to 1280:800, centering the original video. This is optional and I might not use it in the future
 * `-c:v vp9 c:a libvorbis` Select our output VP9 / vorbis codecs
 
+# Credits
+Thanks to those I forked this from and who have submitted PRs:
+* kageurufu (original repo)
+* inkassso
  
