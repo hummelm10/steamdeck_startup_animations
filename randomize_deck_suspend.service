@@ -1,10 +1,10 @@
 [Unit]
 Description=Randomize deck-suspend-animation.webm after resume and before suspend
-Before=multi-user.target
+Before=default.target
 StopWhenUnneeded=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 
 [Service]
 Type=oneshot

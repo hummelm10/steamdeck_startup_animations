@@ -32,5 +32,6 @@ if [[ ! -z "$(list_animations)" ]]; then
   animation="$(random_animation)"
   msg "Using $animation"
   ln -f "$animation" "$DECK_SUSPEND_FILE"
+  ln -f "$animation" "$DECK_SUSPEND_FILE_THROBBER"
 fi
 
