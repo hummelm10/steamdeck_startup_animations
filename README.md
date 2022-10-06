@@ -92,9 +92,9 @@ systemctl --user daemon-reload
 systemctl --user enable --now randomize_deck_suspend.service
 ```
 
-If you want to risk the feature/dev branch you can do so with:
+If you want to risk the dev branch you can do so with:
 ```sh
-curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animations/main/install_dev.sh | bash -
+curl -o - https://raw.githubusercontent.com/hummelm10/steamdeck_startup_animations/feature/dev/bugfix/install_dev.sh | bash -
 ```
 (There's a chance the feature/dev branch will soft brick your device since I'm still working on it. Don't do unless you know what you're doing. However, there is a chance at recovery if you boot from a USB and manually restore the css and js files and remove the startup script.)
 
