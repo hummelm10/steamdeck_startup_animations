@@ -15,9 +15,9 @@ if [[ ! -d "$HOME/homebrew/startup_animations" ]]; then
   cd "$HOME/homebrew/startup_animations"
 fi
 
-if [[ ! -d "$HOME/.steam/steam/steamui/overrides" ]]; then
-  echo ":: Making overrides directory $HOME/.steam/steam/steamui/overrides"
-  mkdir "$HOME/.steam/steam/steamui/overrides"
+if [[ ! -d "$HOME/.steam/root/config/uioverrides/movies" ]]; then
+  echo ":: Making overrides directory $HOME/.steam/root/config/uioverrides/movies"
+  mkdir -vp "$HOME/.steam/root/config/uioverrides/movies"
 fi
 
 # Install the service file
