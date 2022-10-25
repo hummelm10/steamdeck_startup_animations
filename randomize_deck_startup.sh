@@ -64,7 +64,7 @@ mod_js() {
   msg "Linked modified JS file"
 }
 
-mod_js
+#mod_js
 
 if [[ ! -z "$(list_animations)" ]]; then
   animation="$(random_animation)"
